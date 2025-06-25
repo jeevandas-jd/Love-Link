@@ -17,12 +17,7 @@ const getLetter = async (req, res) => {
         if (!letter) {
             return res.status(404).json({ message: "Letter not found" });
         }
-        if(letter.allowedUsers && ! req.body.user){
-            return res.status(500).json({ message: "user auth required" });
-        }
-        if(letter.allowedUsers && !letter.allowedUsers.includes(req.body.user)){
-            return res.status(403).json({ message: "Access denied for this user" });
-        }
+
 
 
         // ✅ If no validation is required, return the letter directly

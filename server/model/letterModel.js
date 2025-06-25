@@ -16,11 +16,7 @@ const letterSchema = new mongoose.Schema({
       answer: { type: String, required: true } // You can hash this for better security
     }
   ],
-  allowedUsers: {
-        type: [String],
-        default: [],
-        required: false
-  },
+  
     heading: {
         type: String,
         required: true

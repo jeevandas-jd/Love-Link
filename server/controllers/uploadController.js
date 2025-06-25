@@ -9,8 +9,7 @@ const uploadLetter = async (req, res) => {
             heading,
             content,
             validationRequired,
-            questions,
-            allowedUsers // Only add if required
+            questions // Only add if required
         });
 
         const savedLetter = await newLetter.save();

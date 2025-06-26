@@ -1,7 +1,7 @@
 const Letter = require('../model/letterModel');
 
 const uploadLetter = async (req, res) => {
-    const { contentName,heading, content, validationRequired, questions } = req.body;
+    const { contentName,heading, content, validationRequired, questions,uploadDate } = req.body;
 
     try {
         const newLetter = new Letter({
@@ -9,14 +9,13 @@ const uploadLetter = async (req, res) => {
             heading,
             content,
             validationRequired,
-            questions // Only add if required
+            questions,
+            uploadDate // Only add if required
         });
 
         const savedLetter = await newLetter.save();
         console.log(`Letter saved: ${heading}`);
-        if (validationRequired) {
-            console.log(`Questions for the letter '${heading}':`, questions);
-        }
+
 
         res.status(201).json({ message: "Letter uploaded successfully", letter: savedLetter });
 

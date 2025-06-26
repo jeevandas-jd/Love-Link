@@ -8,8 +8,11 @@ const letterSchema = new mongoose.Schema({
     validationRequired: {
         type: Boolean,
         default: false
+    },  
+    uploadDate:{
+        type: Date,
+        default: Date.now
     },
-    
     questions: [
     {
       question: { type: String, required: true },
@@ -25,7 +28,7 @@ const letterSchema = new mongoose.Schema({
         type: [String],
         required: true
     }
-}, { timestamps: true });
+},{ timestamps: true });
 
 const Letter = mongoose.model('Letter', letterSchema);
 

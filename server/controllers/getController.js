@@ -26,6 +26,7 @@ const getLetter = async (req, res) => {
                 _id: letter._id,
                 heading: letter.heading,
                 content: letter.content,
+                uploadDate: letter.uploadDate,
                 createdAt: letter.createdAt,
                 updatedAt: letter.updatedAt,
                 questions: []
@@ -67,6 +68,7 @@ const getLetter = async (req, res) => {
             _id: letter._id,
             heading: letter.heading,
             content: letter.content,
+            uploadDate: letter.uploadDate,
             createdAt: letter.createdAt,
             updatedAt: letter.updatedAt,
             questions: letter.questions

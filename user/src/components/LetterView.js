@@ -8,11 +8,9 @@ export const LetterView = () => {
   const [letter, setLetter] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [uploadDate, setUploadDate] = useState("");
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setLoading(true);

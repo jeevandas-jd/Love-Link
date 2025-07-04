@@ -4,7 +4,6 @@ import React from 'react'
 import {LetterList} from "./components/letterList";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LetterView } from './components/LetterView';
-import { Divide } from 'lucide-react';
 import { LetterUploader } from './components/admin/LetterUploader';
 import { About } from './components/About';
 function App() {

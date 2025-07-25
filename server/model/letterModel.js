@@ -11,7 +11,8 @@ const letterSchema = new mongoose.Schema({
     },  
     uploadDate:{
         type: Date,
-        default: Date.now
+        
+        required: false
     },
     questions: [
     {

@@ -1,5 +1,6 @@
 const Letter = require('../model/letterModel');
 
+const Diary = require('../model/diaryModel');
 
 const getLetter = async (req, res) => {
     const letterId = req.params.id;

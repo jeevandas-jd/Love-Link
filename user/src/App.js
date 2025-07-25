@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LetterView } from './components/LetterView';
 import { LetterUploader } from './components/admin/LetterUploader';
 import { About } from './components/About';
+import { Diary } from './components/diary.js'; // Importing the Diary component
 function App() {
   return (
       
@@ -18,6 +19,7 @@ function App() {
           <Route path="/letter/:id" element={<LetterView />} />
           <Route path="/admin/upload/1324" element={<LetterUploader />} />
           <Route path="/about" element={<About />} />
+          <Route path="/diary" element={<Diary />} /> {/* Route for the Diary component */}
           {/* Add more routes as needed */}
         </Routes>
     </div>

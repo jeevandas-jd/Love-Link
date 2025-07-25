@@ -104,3 +104,25 @@
 .manuletter-main {
   flex: 1;
 }
+.manuletter-error {
+  text-align: center;
+  padding: 2rem;
+  color: #3a3226;
+  background-color:#f8f4e8;
+  border: 1px solid #5d4b36;
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: 600px;
+}
+
+.manuletter-error-subtext {
+  font-size: 0.9rem;
+  color: #3a3226;
+  margin-top: 0.5rem;
+}
+
+.manuletter-loading-text {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #666;
+}

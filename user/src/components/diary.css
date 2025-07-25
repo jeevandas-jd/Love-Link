@@ -1,0 +1,242 @@
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e8e1d1;
+            min-height: 100vh;
+            font-family: 'Crimson Text', serif;
+            color: #3a3226;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/old-map.png');
+        }
+
+        .manuletter {
+            background: #f8f4e8;
+            padding: 60px 50px;
+            max-width: 700px;
+            width: 100%;
+            border-radius: 2px;
+            box-shadow: 
+                0 2px 10px rgba(0, 0, 0, 0.1),
+                inset 0 0 100px rgba(214, 191, 157, 0.3);
+            position: relative;
+            border: 1px solid #d8d1c0;
+            background-image: 
+                linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.03) 100%),
+                url('https://www.transparenttextures.com/patterns/rice-paper-3.png');
+            background-blend-mode: multiply;
+            background-size: 100% 36px, auto;
+            line-height: 36px;
+        }
+
+        /* Diary lines */
+        .manuletter::before {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 50px;
+            right: 50px;
+            bottom: 60px;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 35px,
+                rgba(168, 148, 107, 0.15) 35px,
+                rgba(168, 148, 107, 0.15) 36px
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Margin line */
+        .manuletter::after {
+            content: "";
+            position: absolute;
+            top: 60px;
+            left: 40px;
+            bottom: 60px;
+            width: 1px;
+            background: rgba(168, 148, 107, 0.3);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #5d4b36;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: #d4c4a0;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin: 30px 0 15px 0;
+            color: #5d4b36;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 1px;
+            background: #d4c4a0;
+        }
+
+        p {
+            margin-bottom: 0;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        em {
+            font-style: italic;
+            color: #7a6b56;
+        }
+
+        strong {
+            color: #5d4b36;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            font-style: italic;
+            margin-top: 50px;
+            color: #5d4b36;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(to left, #d4c4a0, transparent);
+        }
+
+        /* Diary date header */
+        .diary-date {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-family: 'Crimson Text', cursive;
+            font-size: 14px;
+            color: #7a6b56;
+            transform: rotate(1deg);
+            z-index: 1;
+            background: #f8f4e8;
+            padding: 2px 8px;
+            border: 1px dashed rgba(168, 148, 107, 0.5);
+            border-radius: 3px;
+        }
+
+        /* Ink blot effects */
+        .ink-blot {
+            position: absolute;
+            background: rgba(90, 70, 50, 0.05);
+            filter: blur(1px);
+            z-index: 0;
+        }
+
+        .ink-blot:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        .ink-blot:nth-child(2) {
+            bottom: 20%;
+            right: 8%;
+            width: 80px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        /* Coffee stain */
+        .coffee-stain {
+            position: absolute;
+            bottom: 20px;
+            left: 30%;
+            width: 100px;
+            height: 80px;
+            background: rgba(90, 70, 50, 0.03);
+            border-radius: 50%;
+            filter: blur(2px);
+            z-index: 0;
+            transform: rotate(30deg);
+        }
+
+        /* Page corner fold */
+        .page-fold {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent #d8d1c0 transparent transparent;
+        }
+
+        /* Handwritten underline */
+        .underline {
+            display: inline-block;
+            position: relative;
+        }
+
+        .underline::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #7a6b56;
+            transform: skewY(-5deg);
+        }
+
+        @media (max-width: 768px) {
+            .manuletter {
+                padding: 40px 30px;
+                background-size: 100% 30px, auto;
+                line-height: 30px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }

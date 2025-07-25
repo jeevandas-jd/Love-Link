@@ -11,6 +11,7 @@ export const LetterView = () => {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [uploadDate, setUploadDate] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +24,7 @@ export const LetterView = () => {
           setQuestions(res.data.questions);
         } else if (res.data) {
           setLetter(res.data);
+          setUploadDate(res.data.uploadDate || "");
         }
       })
       .catch(err => console.error("API error:", err))
@@ -40,6 +42,7 @@ export const LetterView = () => {
       .then(res => {
         if (res.data) {
           setLetter(res.data);
+          setUploadDate(res.data.uploadDate || "");
           setShowModal(false);
         }
       })
@@ -71,6 +74,13 @@ export const LetterView = () => {
             {letter.content.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
+            <p className="timestamp" style={{ textAlign: "right", marginTop: "40px" }}>
+  {uploadDate ? new Date(uploadDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }) : "Unknown date"}
+</p>
           </div>
 
           

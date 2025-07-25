@@ -17,4 +17,4 @@ const diarySchema = new mongoose.Schema({
             answer: { type: String, required: true } // You can hash this for better security
         }
     ]})
-    
+module

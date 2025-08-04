@@ -15,11 +15,15 @@ export const LetterView = () => {
 
   useEffect(() => {
     setLoading(true);
+    setError(""); // Reset error
+    const startTime = Date.now();
+
     getLetterById(id)
       .then(res => {
-        if(res.data.message ==="user auth required"){
-
+        if (res.data.message === "user auth required") {
+          // Reserved for future handling
         }
+
         if (res.data.questions?.length > 0 && res.data.message === "Validation required") {
           setQuestions(res.data.questions);
         } else if (res.data) {
@@ -27,8 +31,19 @@ export const LetterView = () => {
           setUploadDate(res.data.uploadDate || "");
         }
       })
-      .catch(err => console.error("API error:", err))
-      .finally(() => setLoading(false));
+      .catch(err => {
+        console.error("API error:", err);
+        setError("Unable to load document. Please try again later.");
+      })
+      .finally(() => {
+        const elapsed = Date.now() - startTime;
+        const MIN_LOADING_TIME = 3000;
+        const remaining = MIN_LOADING_TIME - elapsed;
+
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining > 0 ? remaining : 0);
+      });
   }, [id]);
 
   const handleAnswerChange = (index, value) => {
@@ -62,10 +77,14 @@ export const LetterView = () => {
       </header>
 
       {loading ? (
-        <div className="manuletter-view-loading">
-          <div className="loading-line"></div>
-          <div className="loading-line"></div>
-          <div className="loading-line"></div>
+        <div className="manuletter-view-loading funny-loading">
+          <div className="typewriter">
+            <span>Loading content...</span>
+          </div>
+        </div>
+      ) : error ? (
+        <div className="manuletter-error">
+          <p>{error}</p>
         </div>
       ) : letter ? (
         <article className="manuletter-document">
@@ -75,15 +94,13 @@ export const LetterView = () => {
               <p key={i}>{paragraph}</p>
             ))}
             <p className="timestamp" style={{ textAlign: "right", marginTop: "40px" }}>
-  {uploadDate ? new Date(uploadDate).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  }) : "Unknown date"}
-</p>
+              {uploadDate ? new Date(uploadDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              }) : "Unknown date"}
+            </p>
           </div>
-
-          
         </article>
       ) : questions.length > 0 ? (
         <>
@@ -134,7 +151,7 @@ export const LetterView = () => {
         </>
       ) : (
         <div className="manuletter-empty">
-          Document not available
+          📄 This manuscript must’ve wandered off the shelf...
         </div>
       )}
     </div>

@@ -18,6 +18,6 @@ export const getLetterByIdWithQuestions=async (id,answers)=>{
 
 }
 
-export const uploadLetter=async (payload)=>{
+export const uploadLetter=async (payload)=>{    
     return axios.post(`${BASE_URL}/upload`,payload);
 }

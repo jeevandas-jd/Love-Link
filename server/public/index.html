@@ -320,6 +320,7 @@
       <p>Welcome to your quantum-encrypted love letters portal. Choose your mission:</p>
       <button onclick="showSection('sendMail')">📡 Send Message</button>
       <button onclick="showSection('inbox')">📥 View Inbox</button>
+      <button onclick="showSection('logInfo')"> LogInfo</button>
     </section>
 
     <!-- Send Mail Page -->
@@ -343,7 +344,15 @@
       <button class="load-btn" onclick="loadInbox()">🔍 Load Inbox</button>
       <ul id="inboxList"></ul>
     </section>
+    <!-- Log Info Page -->
+    <section id="logInfo" style="display:none;">
+      <button class="back-btn" onclick="showSection('homePage')">⬅ Back to Home</button>
+      <h2>📜 Log Information</h2>
+      <button class="load-btn" onclick="loadLogInfo()">🔍 Load Log Info</button>
+      <ul id="logList"></ul>
+    </section>
   </div>
+
 
   <script>
     // Create floating hearts

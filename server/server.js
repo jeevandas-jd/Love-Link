@@ -19,8 +19,10 @@ app.use(express.static('public'));  // serve index.html automatically
 
 app.use("/api/mail", mailRouter);
 const letterRouter = require("./routes/letterRouts");
-app.use("/api/letter", letterRouter);
 
+app.use("/api/letter", letterRouter);
+const logRouter = require("./routes/logRout");
+app.use("/api/log", logRouter);
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 });

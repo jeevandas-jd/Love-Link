@@ -8,7 +8,7 @@ document.getElementById('mailForm').addEventListener('submit', async (e) => {
     body: document.getElementById('body').value
   };
 
-  const res = await fetch('http://localhost:3000/api/mail/send-email', {
+  const res = await fetch('http://localhost:8000/api/mail/send-email', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(mail)
@@ -20,7 +20,7 @@ document.getElementById('mailForm').addEventListener('submit', async (e) => {
 
 async function loadInbox() {
   const user = document.getElementById('username').value;
-  const res = await fetch(`http://localhost:3000/api/mail/get-email/${user}`);
+  const res = await fetch(`http://localhost:8000/api/mail/get-email/${user}`);
   const mails = await res.json();
 
   const inboxList = document.getElementById('inboxList');
@@ -38,4 +38,19 @@ function showSection(sectionId) {
   sections.forEach(id => {
     document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
   });
+}
+
+function loadLogInfo() {
+  fetch('http://localhost:8000/api/log/loginfo')
+    .then(response => response.json())
+    .then(logs => {
+      const logList = document.getElementById('logList');
+      logList.innerHTML = '';
+      logs.forEach(log => {
+        const item = document.createElement('li');
+        item.textContent = `IP: ${log.ipAddress}, Location: ${log.location || 'not provided'},date: ${log.logDate.toLocaleString()}, time: ${log.logTime}`;
+        logList.appendChild(item);
+      });
+    })
+    .catch(error => console.error('Error loading log info:', error));
 }

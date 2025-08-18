@@ -5,12 +5,18 @@ const app= express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const ButtonInfo = require('./model/buttonInfo');
 app.use(cors());
 
 dotenv.config();
 connectDB();
 const port = 8000;
+// API route
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+const buttonInfoRouter = require('./routes/buttonInfo');
+app.use('/api/button', buttonInfoRouter);
 const mailRouter = require("./routes/emailRout");
 console.log('mailRouter is:', mailRouter);
 

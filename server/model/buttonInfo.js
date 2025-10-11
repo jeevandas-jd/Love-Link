@@ -9,7 +9,8 @@ const buttonInfoSchema = new mongoose.Schema({
   userAgent: { type: String },
   ip: { type: String },
   url: { type: String },
-  extraData: { type: Object }  
+  extraData: { type: Object },
+  hihlited:{ type: Boolean, default: false }  
 
 })
 

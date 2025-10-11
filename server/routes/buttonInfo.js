@@ -1,4 +1,4 @@
-const {ButtonController, getButtonInfo,clearLog} = require('../controllers/buttonController');
+const {ButtonController, getButtonInfo,clearLog,logCliInfo,getCliLogs,searchCliLogByIP} = require('../controllers/buttonController');
 
 const express = require('express');
 const router = express.Router();
@@ -10,5 +10,9 @@ router.post('/submit', ButtonController);
 router.get('/all', getButtonInfo);
 // Route to clear all button information
 router.delete('/clear', clearLog);
+// Route to highlight a specific button entry
+router.post('/cli-log', logCliInfo);
+router.get('/cli-logs', getCliLogs);
+router.post('/search-cli-log', searchCliLogByIP);
 
 module.exports = router;

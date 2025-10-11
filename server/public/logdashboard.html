@@ -37,7 +37,7 @@ async function clearLogs() {
   if (!confirm('Are you sure you want to clear all logs?')) return;
 
   try {
-    const res = await fetch('http://localhost:8000/api/button/clear', { method: 'DELETE' });
+    const res = await fetch('https://love-link-mtyd.onrender.com/api/button/clear', { method: 'DELETE' });
     if (res.ok) {
       alert('Logs cleared successfully');
       loadLogs();
@@ -54,7 +54,7 @@ async function loadLogs() {
   tbody.innerHTML = 'Loading...';
   
   try {
-    const res = await fetch('http://localhost:8000/api/button/all');
+    const res = await fetch('https://love-link-mtyd.onrender.com/api/button/all');
     const logs = await res.json();
 
     tbody.innerHTML = logs.map(log => `

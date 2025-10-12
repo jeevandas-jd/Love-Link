@@ -1,4 +1,4 @@
-const { ImagePlay } = require('lucide-react');
+
 const mongoose = require('mongoose');
 
 const cliLogSchema = new mongoose.Schema({

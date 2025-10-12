@@ -11,3 +11,5 @@ const cliLogSchema = new mongoose.Schema({
 });
 
 const CliLog = mongoose.model('CliLog', cliLogSchema);
+
+module.exports = CliLog;

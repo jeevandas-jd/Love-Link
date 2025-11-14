@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-//import "./diary.css";
+import "./diary.css";
 export const Diary=()=>{
     return(
          <div className="manuletter">
